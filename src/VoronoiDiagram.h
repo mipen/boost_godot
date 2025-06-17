@@ -24,13 +24,15 @@ protected:
 
 private:
 	std::vector<Vector2i> points;
-	std::vector<Segment> segments;
-	voronoi_diagram<double> vd;
+	std::vector<Rect2i> segments;
+	voronoi_diagram<float> vd;
 
 public:
 	void addPoint(const Vector2i &p);
 	// void addPoints(const std::vector<Vector2i> &points);
+	void addSegment(const Rect2i &s);
 	void construct();
+	void printDiagram();
 };
 
 #endif // VORONOI_DIAGRAM_H
