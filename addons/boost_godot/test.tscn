@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d18qq5u5c78kw"]
+
+[ext_resource type="Script" uid="uid://btmd06ijho421" path="res://csharp/VDTest.cs" id="1_37kl0"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="VDTest" type="Node3D" parent="."]
+script = ExtResource("1_37kl0")
+metadata/_custom_type_script = "uid://btmd06ijho421"
