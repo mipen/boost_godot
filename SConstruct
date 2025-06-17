@@ -6,7 +6,7 @@ from methods import print_error
 
 
 libname = "boost_godot"
-projectdir = "assets/boost_godot"
+projectdir = "addons/boost_godot"
 
 localEnv = Environment(tools=["default"], PLATFORM="")
 
