@@ -3,6 +3,7 @@ import os
 import sys
 
 from methods import print_error
+from dotenv import load_dotenv
 
 
 libname = "boost_godot"
@@ -38,7 +39,7 @@ Run the following command to download godot-cpp:
 env = SConscript("godot-cpp/SConstruct", {"env": env, "customs": customs})
 
 env.Append(CPPPATH=["src/", "boost/"])
-sources = Glob("src/*.cpp")
+sources = Glob("src/*.cpp") + Glob("src/debug/*.cpp")
 
 if env["target"] in ["editor", "template_debug"]:
     try:
@@ -59,6 +60,14 @@ library = env.SharedLibrary(
 )
 
 copy = env.Install("{}/bin/{}/".format(projectdir, env["platform"]), library)
-
 default_args = [library, copy]
+
+src_dir = 'addons/boost_godot'
+load_dotenv('.env')
+dst_dir = os.getenv('DST_DIR', 'tmp')
+
+if(dst_dir):
+    copy_folder = env.Install(dst_dir, src_dir)
+    default_args.append(copy_folder)
+
 Default(*default_args)
