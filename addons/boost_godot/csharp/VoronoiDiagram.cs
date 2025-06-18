@@ -1,5 +1,4 @@
 using Godot;
-using Godot.NativeInterop;
 
 namespace BoostGodot.csharp
 {
@@ -53,6 +52,21 @@ namespace BoostGodot.csharp
                 return;
             }
             instance.Call(PRINT_DIAGRAM);
+        }
+
+        public void RegisterCanvas(Control canvas)
+        {
+            if (instance == null)
+            {
+                GD.PrintErr("VoronoiDiagram instance is not initialized.");
+                return;
+            }
+            if (canvas == null)
+            {
+                GD.PrintErr("Canvas is null.");
+                return;
+            }
+            instance.Call("registerCanvas", canvas);
         }
     }
 }

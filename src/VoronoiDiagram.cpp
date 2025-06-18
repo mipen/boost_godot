@@ -7,6 +7,7 @@ void VoronoiDiagram::_bind_methods() {
 	godot::ClassDB::bind_method(D_METHOD("addSegment", "rect2i"), &VoronoiDiagram::addSegment);
 	godot::ClassDB::bind_method(D_METHOD("construct"), &VoronoiDiagram::construct);
 	godot::ClassDB::bind_method(D_METHOD("printDiagram"), &VoronoiDiagram::printDiagram);
+	godot::ClassDB::bind_method(D_METHOD("registerCanvas"), &VoronoiDiagram::registerCanvas);
 }
 
 void VoronoiDiagram::addPoint(const Vector2i &p) {
@@ -27,10 +28,23 @@ void VoronoiDiagram::construct() {
 	UtilityFunctions::print("Constructing Voronoi diagram with ", points.size(), " points and ", segments.size(), " segments.");
 	construct_voronoi(points.begin(), points.end(), segments.begin(), segments.end(), &vd);
 	UtilityFunctions::print("Voronoi diagram constructed successfully.");
+	if (canvas) {
+		canvas->queue_redraw();
+	}
 }
 
 void VoronoiDiagram::printDiagram() {
 	UtilityFunctions::print("Cells: " + String::num_int64(vd.num_cells()) +
-		" | Vertices: " + String::num_int64(vd.num_vertices()) +
-		" | Edges: " + String::num_int64(vd.num_edges()));
+			" | Vertices: " + String::num_int64(vd.num_vertices()) +
+			" | Edges: " + String::num_int64(vd.num_edges()));
+}
+
+void VoronoiDiagram::registerCanvas(Control *c) {
+	if (VoronoiCanvas *vc = Object::cast_to<VoronoiCanvas>(c); vc) {
+		this->canvas = vc;
+		vc->set_diagram(&vd);
+		UtilityFunctions::print("Canvas registered successfully.");
+	} else {
+		UtilityFunctions::print("Failed to register canvas: null pointer.");
+	}
 }

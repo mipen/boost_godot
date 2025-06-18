@@ -6,6 +6,7 @@
 #include <godot_cpp/godot.hpp>
 
 #include "VoronoiDiagram.h"
+#include "debug/VoronoiCanvas.h"
 
 using namespace godot;
 
@@ -15,6 +16,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 	GDREGISTER_CLASS(VoronoiDiagram);
+	GDREGISTER_CLASS(VoronoiCanvas);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

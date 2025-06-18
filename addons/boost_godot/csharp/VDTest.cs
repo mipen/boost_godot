@@ -8,6 +8,8 @@ namespace BoostGodot.csharp
     [GlobalClass]
     public partial class VDTest : Node3D
     {
+        [Export]
+        Control voronoiCanvas;
         [ExportToolButton("Add Point")]
         Callable addPoint => Callable.From(AddPoint);
         [ExportToolButton("Add Segment")]
@@ -23,7 +25,7 @@ namespace BoostGodot.csharp
 
         override public void _Ready()
         {
-            vd = new VoronoiDiagram();
+            Reset();
         }
 
         public void AddPoint()
@@ -46,11 +48,12 @@ namespace BoostGodot.csharp
         public void Reset()
         {
             vd = new VoronoiDiagram();
+            vd.RegisterCanvas(voronoiCanvas);
         }
 
         private int randNum()
         {
-            return 100 - random.Next(201);
+            return random.Next(201);
         }
     }
 }

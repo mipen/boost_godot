@@ -1,10 +1,12 @@
 #include <boost/polygon/voronoi.hpp>
 #include <cstdio>
+#include <godot_cpp/classes/control.hpp>
 #include <godot_cpp/classes/font.hpp>
 #include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 #include <vector>
 
+#include "debug/VoronoiCanvas.h"
 #include "point.hpp"
 #include "segment.hpp"
 
@@ -25,7 +27,8 @@ protected:
 private:
 	std::vector<Vector2i> points;
 	std::vector<Rect2i> segments;
-	voronoi_diagram<float> vd;
+	voronoi_diagram<double> vd;
+	Control *canvas = nullptr;
 
 public:
 	void addPoint(const Vector2i &p);
@@ -33,6 +36,7 @@ public:
 	void addSegment(const Rect2i &s);
 	void construct();
 	void printDiagram();
+	void registerCanvas(Control *canvas);
 };
 
 #endif // VORONOI_DIAGRAM_H
