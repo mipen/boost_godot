@@ -34,6 +34,7 @@ public:
 	void addPoint(const Vector2i &p);
 	// void addPoints(const std::vector<Vector2i> &points);
 	void addSegment(const Rect2i &s);
+	void clear();
 	void construct();
 	void printDiagram();
 	void registerCanvas(Control *canvas);

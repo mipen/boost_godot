@@ -54,6 +54,16 @@ namespace BoostGodot.csharp
             instance.Call(PRINT_DIAGRAM);
         }
 
+        public void Clear()
+        {
+            if (instance == null)
+            {
+                GD.PrintErr("VoronoiDiagram instance is not initialized.");
+                return;
+            }
+            instance.Call("clear");
+        }
+
         public void RegisterCanvas(Control canvas)
         {
             if (instance == null)

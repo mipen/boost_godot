@@ -6,6 +6,7 @@ void VoronoiDiagram::_bind_methods() {
 	godot::ClassDB::bind_method(D_METHOD("addPoint", "vector2i"), &VoronoiDiagram::addPoint);
 	godot::ClassDB::bind_method(D_METHOD("addSegment", "rect2i"), &VoronoiDiagram::addSegment);
 	godot::ClassDB::bind_method(D_METHOD("construct"), &VoronoiDiagram::construct);
+	godot::ClassDB::bind_method(D_METHOD("clear"), &VoronoiDiagram::clear);
 	godot::ClassDB::bind_method(D_METHOD("printDiagram"), &VoronoiDiagram::printDiagram);
 	godot::ClassDB::bind_method(D_METHOD("registerCanvas"), &VoronoiDiagram::registerCanvas);
 }
@@ -31,6 +32,17 @@ void VoronoiDiagram::construct() {
 	if (canvas) {
 		canvas->queue_redraw();
 	}
+}
+
+void VoronoiDiagram::clear() {
+	UtilityFunctions::print("Clearing Voronoi diagram.");
+	points.clear();
+	segments.clear();
+	vd.clear();
+	if (canvas) {
+		canvas->queue_redraw();
+	}
+	UtilityFunctions::print("Voronoi diagram cleared successfully.");
 }
 
 void VoronoiDiagram::printDiagram() {
