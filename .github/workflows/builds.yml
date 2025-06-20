@@ -51,6 +51,11 @@ jobs:
       #  run: |
       #    clang-format src/** --dry-run --Werror
 
+      - name: Install dotenv pip package
+        shell: bash
+        run: |
+          python -m pip install dotenv
+
       # Add linux x86_32 toolchain
       - name: Install multilib support
         if: ${{ matrix.target.platform == 'linux' && matrix.target.arch == 'x86_32' }}
@@ -96,7 +101,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: godot-cpp-template-${{ matrix.target.platform }}-${{ matrix.target.arch }}-${{ matrix.float-precision }}-${{ matrix.target-type }}
+          name: boost-godot-${{ matrix.target.platform }}-${{ matrix.target.arch }}-${{ matrix.float-precision }}-${{ matrix.target-type }}
           path: |
             ${{ github.workspace }}/bin/**
 
@@ -109,6 +114,6 @@ jobs:
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: godot-cpp-template
-          pattern: godot-cpp-template-*
+          name: boost-godot
+          pattern: boost-godot-*
           delete-merged: true
