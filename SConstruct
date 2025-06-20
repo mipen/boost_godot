@@ -64,7 +64,7 @@ default_args = [library, copy]
 
 src_dir = 'addons/boost_godot'
 load_dotenv('.env')
-dst_dir = os.getenv('DST_DIR', 'tmp')
+dst_dir = os.getenv('DST_DIR')
 
 if(dst_dir):
     copy_folder = env.Install(dst_dir, src_dir)
